@@ -11,11 +11,9 @@ export default class ListItem extends Component {
     toggle: false
   }
 
-  markAsCompleted = () => {
-    this.props.markAsCompleted(this.props.itemId)
-  }
+  markAsCompleted = () => this.props.markAsCompleted(this.props.itemId)
 
-  onLeftAction = (e) => {
+  onLeftAction = () => {
     this.setState({ toggle: !this.state.toggle })
     this.markAsCompleted()
   }
@@ -27,32 +25,30 @@ export default class ListItem extends Component {
     } : { backgroundColor: '#ff4b3f', alignItems: 'flex-start', }
   }
 
-  getLeftStyles = () => {
-    return !this.state.leftActionActivated ? {
-      backgroundColor: '#115110',
-    } : { backgroundColor: '#ff4b3f' }
-  }
+  getLeftStyles = () =>
+    this.state.leftActionActivated
+      ? { backgroundColor: '#ff4b3f' }
+      : { backgroundColor: '#115110' }
 
-  getLeftOffContent = () => <View style={[styles.listItemOffContent, styles.leftOff, this.getLeftStyles()]}>
-    <Text style={styles.listItemOffContentText}>
-      {this.state.leftActionActivated ?
-        'Completed!' :
-        'Pull right to complete'}</Text></View>
+  getLeftOffContent = () =>
+    <View style={[styles.listItemOffContent, styles.leftOff, this.getLeftStyles()]}>
+      <Text style={styles.listItemOffContentText}>
+        {this.state.leftActionActivated ?
+          'Completed!' :
+          'Pull right to complete'}</Text></View>
 
-  getRightOffContent = () => <View style={[styles.listItemOffContent, styles.rightOff, this.getRightStyles()]}>
-    <Text style={styles.listItemOffContentText}>
-      Pull left do delete</Text></View>
+  getRightOffContent = () =>
+    <View style={[styles.listItemOffContent, styles.rightOff, this.getRightStyles()]}>
+      <Text style={styles.listItemOffContentText}>
+        Pull left do delete</Text></View>
 
-  getItemTextStyles = () => {
-    return this.props.completed ?
-      [styles.listItemText, styles.listItemTextCompleted]
+  getItemTextStyles = () =>
+    this.props.completed
+      ? [styles.listItemText, styles.listItemTextCompleted]
       : [styles.listItemText]
-  }
 
   render () {
-
     const { toggle } = this.state
-
     return (
       <Swipeable
         leftActionActivationDistance={width / 2}

@@ -18,12 +18,13 @@ export default class ListItem extends Component {
     this.markAsCompleted()
   }
 
-  getRightStyles = () => {
-    return !this.state.rightActionActivated ? {
-      backgroundColor: '#8f1f1c',
-      alignItems: 'flex-start',
-    } : { backgroundColor: '#ff4b3f', alignItems: 'flex-start', }
-  }
+  getRightStyles = () =>
+    this.state.rightActionActivated
+      ? { backgroundColor: '#ff4b3f', alignItems: 'flex-start' }
+      : {
+        backgroundColor: '#8f1f1c',
+        alignItems: 'flex-start'
+      }
 
   getLeftStyles = () =>
     this.state.leftActionActivated
